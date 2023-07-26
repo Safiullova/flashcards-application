@@ -1,3 +1,5 @@
+@import '../../../src/style/vars.scss';
+
 .container {
     display: flex;
     flex-direction: row;
@@ -9,10 +11,21 @@
 .card {
     width: 250px;
     height: 350px;
-    border: 2px solid yellow;
+    border: 2px solid $color-violet;
+
+    &_button {
+        height: 50px;
+        background-color: $color-green;
+    }
+    &_button:hover {
+        background-color: $color-violet;
+    }
+    &_button:active {
+        background-color: $color-yellow;
+    }
 }
 
 .selected {
-    background-color: pink;
+    background-color: $color-pinc;
     font-weight: bolder;
 }

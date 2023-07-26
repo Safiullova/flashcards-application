@@ -6,7 +6,7 @@ export default function Slider() {
   return (
     <div className={st.container}>
       {cards.map((card)=> (
-        <Card className={st.selected}
+        <Card className={st.card}
         english={card.english}
         transcription={card.transcription}
         russian={card.russian}

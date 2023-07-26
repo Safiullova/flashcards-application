@@ -1,4 +1,6 @@
+@import '../../src/style/vars.scss';
+
 body {
-    background-color: rgb(26, 13, 50);
-    color: rgb(228, 218, 238);
+    background-color: $color-bgDark;
+    color: $color-greyText;
 }
