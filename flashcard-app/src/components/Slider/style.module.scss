@@ -9,23 +9,45 @@
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 250px;
     height: 350px;
     border: 2px solid $color-violet;
 
+    &__ranscription {
+        font-weight: bold;
+    }
+    &__russian {
+        margin-bottom: 35px;
+        font-weight: bolder;
+    }
     &_button {
         height: 50px;
-        background-color: $color-green;
+        background-color: $color-BG-green;
+        color: $color-TXT-green;
     }
-    &_button:hover {
-        background-color: $color-violet;
-    }
-    &_button:active {
-        background-color: $color-yellow;
+    
+    &__btnList {
+        display: flex;
+        justify-content: space-around;
+        width: 250px;
+
+        &_Ok {
+            background-color: $color-BG-green;
+            color: $color-TXT-green;
+        }
+
+        &_Nok {
+            background-color: $color-BG-red;
+            color: $color-TXT-red;
+        }
     }
 }
 
-.selected {
-    background-color: $color-pinc;
-    font-weight: bolder;
+.russianNone {
+    display: none;
 }
+

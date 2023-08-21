@@ -11,8 +11,8 @@ export default function Header() {
           <li className={st.header_nav_list_item}>Тренировка</li>
           <li className={st.header_nav_list_item}>Добавить</li>
         </ul>
-    </nav>
-    <p className={st.header_tema}> Переключатель темы</p>
-        </div>
+      </nav>
+      <p className={st.header_tema}> Переключатель темы</p>
+    </div>
   )
 }

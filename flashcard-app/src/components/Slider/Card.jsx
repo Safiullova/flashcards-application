@@ -1,13 +1,42 @@
+import {useState} from "react";
 import st from './style.module.scss'
 
 export default function Card(props) {
+    const {english, id, transcription, russian} = props;
+    const [pressed, setPressed] = useState (false);
+    const handleChange = () => {
+        setPressed (!pressed)
+    }
+    const [click, setClick] = useState (false);
+    const handleClickOk = () => {
+        setClick (!click)
+        setPressed (!pressed)
+    }
+    const handleClickNok = () => {
+        setClick (!click)
+        setPressed (!pressed)
+    }
+
+
     return (
         <div className={st.card}>
-            <p className='cardEnglish'>{props.english}</p>
-            <p className='cardTranscription'>{props.transcription}</p>
-            <p className='cardRussian'>{props.russian}</p>
-        {props.isSelected}
-        <button className={st.card_button}>Показать перевод</button>
+            <h1 className={st.card__english}>{english}</h1>
+            <p className={st.card__id}>{id}</p>
+            <p className={st.card__ranscription}>{transcription}</p>
+            
+            {!pressed ?
+            (<button className={st.card_button} onClick={handleChange}>Показать перевод</button>
+            )
+            : (
+            <>
+            <div className={st.card__russian}>{russian}</div>
+            <div className={st.card__btnList}>
+                <button onClick={handleClickOk} className={st.card__btnList_Ok}>Правильно</button>
+                <button onClick={handleClickNok} className={st.card__btnList_Nok}>Еще повторить</button>
+            </div>
+            </>
+            ) 
+            }
         </div>
     )
 }

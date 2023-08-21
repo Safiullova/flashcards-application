@@ -2,13 +2,11 @@
 
 .table {
     margin: 0 auto;
-    // border: 2px solid red;
-
 
     &__row {
         display: flex;
 
-        &_number, &_english, &_transcription, &_russian, &_theme, &_buttonListEdit, &_buttonListSave {
+        &_number, &_english, &_transcription, &_russian, &_theme, &_buttonList{
             display: flex;
             height: 50px;
             padding-left: 5px;
@@ -27,8 +25,17 @@
         &_theme {
             width: 15%;
         }
+        &_buttonList {
+            width: 350px;
+        }
     }
 }
-.salected {
+
+.selected {
     background-color:  #4A465B;
+    border: 1px solid $color-TXT-green;
+}
+
+.deleled {
+    display: none;
 }
