@@ -9,7 +9,7 @@ export default function NewRow() {
 
     return (
         <div className={st.table__row}>
-            <input className={st.table__row_english} type="text" placeholder='english' value={clickPlus && '123'}></input>
+            <input className={st.table__row_english} type="text" placeholder='english' defaultValue={clickPlus && '123'}></input>
             <input className={st.table__row_transcription} type="text" placeholder='transcription'></input>
             <input className={st.table__row_russian} type="text" placeholder='russian'></input>
             <input className={st.table__row_theme} type="text" placeholder='theme'></input>

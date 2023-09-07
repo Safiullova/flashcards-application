@@ -1,0 +1,36 @@
+header {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    border: 2px solid blue;
+
+
+    nav {
+        width:75%;
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+            padding: 0;
+
+            a {
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 23px;
+                color: blue;
+                text-decoration: none;
+            }
+            a:hover {
+                color: blueviolet;
+            }
+            .active{
+                color: green;
+            }
+        }
+    }
+
+.logo {
+    width: 150px;
+    height: 150px;
+}
