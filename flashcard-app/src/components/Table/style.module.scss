@@ -5,27 +5,22 @@
 
     &__row {
         display: flex;
+        
 
-        &_number, &_english, &_transcription, &_russian, &_theme, &_buttonList{
+        &_input{
+            width: 20%;
             display: flex;
             height: 50px;
             padding-left: 5px;
             align-items:  center;
             border: 1px solid $color-yellow;
         }
-        &_number{
-            width: 50px;
-        }
-        &_english {
-            width: 20%;
-        }
-        &_transcription, &_russian {
-            width: 30%;
-        }
-        &_theme {
-            width: 15%;
-        }
         &_buttonList {
+            display: flex;
+            height: 50px;
+            padding-left: 5px;
+            align-items:  center;
+            border: 1px solid $color-yellow;
             width: 350px;
         }
     }

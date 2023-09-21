@@ -22,7 +22,6 @@ export default function Slider() {
     
     return (
         <div>
-            {/* <h1>Слайдер/Тренировка</h1> */}
             <Card className={st.card}
             id={cards[index].id}
             english={cards[index].english}
