@@ -2,7 +2,7 @@ import {useState} from "react";
 import st from './style.module.scss'
 
 export default function Card(props) {
-    const {english, id, transcription, russian} = props;
+    const {english, transcription, russian} = props;
     const [pressed, setPressed] = useState (false);
     const handleChange = () => {
         setPressed (!pressed)
@@ -21,7 +21,7 @@ export default function Card(props) {
     return (
         <div className={st.card}>
             <h1 className={st.card__english}>{english}</h1>
-            <p className={st.card__id}>{id}</p>
+            {/* <p className={st.card__id}>{id}</p> */}
             <p className={st.card__ranscription}>{transcription}</p>
             
             {!pressed ?

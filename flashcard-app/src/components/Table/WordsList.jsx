@@ -62,7 +62,7 @@ export default function WordsList() {
         arrData.splice(id, 1);
         setWords(arrData);
     }
-    function editRow(english, transcription, russian, theme, id) {
+    function editRow(english, transcription, russian, tags, id) {
         const updatedWords = words.map(item => {
             if (item.id === id) {
                 return {
@@ -70,16 +70,17 @@ export default function WordsList() {
                     english,
                     transcription,
                     russian,
-                    theme
+                    tags
                 };
             }
             return item;
         });
         setWords(updatedWords);
     }
-    // if (!words) {
-    //     return <h1>Loading...</h1>;
-    // };
+
+    if (!words) {
+        return <h1>Loading...</h1>;
+    };
 
     return (
         <div className={st.container}>
