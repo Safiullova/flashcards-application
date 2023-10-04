@@ -1,18 +1,23 @@
-import cards from '../data/words.json'
-import st from './style.module.scss'
+// import cards from '../data/words.json'
+import st from './style.module.scss';
 import {useState} from "react";
-import Card from './Card'
+import Card from './Card';
+import { useContext} from 'react';
+import { MyContext } from '../../context/MyContext';
 
 export default function Slider() {
     // const index = Number (cards.length -1);
     // const rand = Math.floor (Math.random(0, 10)*index ) +1;
 
+    const {words} = useContext(MyContext); // Массив с карточками\словами
+
+
     let [index, setIndex] = useState (0);
     let [check, setCheck] = useState (1);
 
     const handleClickUp = () => {
-        setIndex (index < cards.length-1 ? index +1 : 0);
-        setCheck (check < cards.length? check +1 : 1);
+        setIndex (index < words.length-1 ? index +1 : 0);
+        setCheck (check < words.length? check +1 : 1);
     }
     
     function handleClickBack() {
@@ -23,16 +28,16 @@ export default function Slider() {
     return (
         <div>
             <Card className={st.card}
-            id={cards[index].id}
-            english={cards[index].english}
-            transcription={cards[index].transcription}
-            russian={cards[index].russian}
+            id={words[index].id}
+            english={words[index].english}
+            transcription={words[index].transcription}
+            russian={words[index].russian}
             />
             <div className={st.card__btnList}>
                 <button className={st.card__btnList_Nok} onClick={handleClickBack}>Назад</button>
                 <p>{check}</p> {/* Счетчик */}
                 <p>/</p>
-                <p>{cards.length}</p> {/* сколько всего карточек */}
+                <p>{words.length}</p> {/* сколько всего карточек */}
                 <button className={st.card__btnList_Ok} onClick={handleClickUp}>Вперед</button>
             </div>
         </div>

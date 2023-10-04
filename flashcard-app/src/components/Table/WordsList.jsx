@@ -1,12 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import cards from '../data/words.json'
+// import cards from '../data/words.json'
 // import NewRow from './NewRow'
 import Table from './Table'
 import st from './style.module.scss'
+import { useContext } from "react";
+import { MyContext } from "../../context/MyContext";
 
 export default function WordsList() {
+// const cards = useContext(MyContext);
 
-    const [words, setWords] = useState(cards); // Массив с карточками\словами
+    const {words, setWords} = useContext(MyContext); // Массив с карточками\словами
+    // const {setWords} = useContext(MyContext); // Массив с карточками\словами
+    console.log(words);
+    // const [words, setWords] = useState(cards); // Массив с карточками\словами
     const [valueEn, setValueEn] = useState(''); // Состояние input англ слова
     const [valueTr, setValueTr] = useState(''); // Состояние input транскрипция
     const [valueRu, setValueRu] = useState(''); // Состояние input перевод
