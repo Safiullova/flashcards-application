@@ -6,12 +6,13 @@ export const MyContext = createContext();
 
 export function MyContextComponent({ children }) {
   const [words, setWords] = useState(false);
+  const [flag, setFlag] = useState(true);
 
-  const value = { words, setWords};
+  const value = { words, setWords, flag, setFlag };
 
   useEffect(() => {
     getWordServer();
-  }, []);
+  }, [flag]);
 
   async function getWordServer() {
     const wordServer = await GET.getWord();

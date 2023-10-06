@@ -1,5 +1,4 @@
 import {useState, useEffect} from "react";
-// import CheckBox from './CheckBox'
 import st from './style.module.scss';
 import PUT from "../../services/PUT";
 
@@ -8,6 +7,7 @@ export default function Table(props) {
     const [valueTr, setValueTr] = useState(''); // Состояние input транскрипция
     const [valueRu, setValueRu] = useState(''); // Состояние input перевод
     const [valueTh, setValueTh] = useState(''); // Состояние input тема
+    const {flag, setFlag} = props;
   
     const [clickEdit, setClickEdit] = useState (false); // Состояние для редактирования строки
     const handleClickEdit = () => {
@@ -28,11 +28,8 @@ export default function Table(props) {
     console.log(newWord);
 
 await PUT.putWord (id, newWord);
-
-    // props.editRow(props.id, newWord);
-      // props.editRow(newWord, props.id);
-      // props.editRow(valueEn, valueTr, valueRu, valueTh, props.id);
       setClickEdit (!clickEdit);
+      setFlag(!flag); 
   }
 
     const [clickCancel, setClickCancel] = useState (false); // Состояние для отмены редактирования
@@ -66,10 +63,8 @@ await PUT.putWord (id, newWord);
         <><div className={st.table__row_input}>{props.english}</div>
           <div className={st.table__row_input}>{props.transcription}</div>
           <div className={st.table__row_input}>{props.russian}</div>
-          <div className={st.table__row_input}>
-            {/* <CheckBox></CheckBox> */}
-            {props.theme}
-          </div>
+          <div className={st.table__row_input}>{props.theme}</div>
+          
           <div className={st.table__row_buttonList}>
           <button className={st.btnEdit} onClick={handleClickEdit} > Редактировать</button>
           <button className={st.btnDeleted} onClick={() => props.deleteRow(props.id)}>Удалить</button>
@@ -82,7 +77,6 @@ await PUT.putWord (id, newWord);
           <input className={st.table__row_input} type="text" defaultValue={props.theme} value={valueTh} onChange={handleChange} name="theme"></input>
           <div className={st.table__row_buttonList}>
             <button className={st.btnCancel} onClick={handleClickCancel}>Отмена</button>
-            {/* <button className={st.btnSave} onClick={clickSave}>Сохранить</button>  */}
             <button className={st.btnSave} onClick={clickSave}>Сохранить</button> 
           </div>
         </>}

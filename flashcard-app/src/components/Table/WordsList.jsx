@@ -9,9 +9,8 @@ import DEL from "../../services/DEL";
 import PUT from "../../services/PUT";
 
 export default function WordsList() {
-// const cards = useContext(MyContext);
 
-    const {words, setWords} = useContext(MyContext); // Массив с карточками\словами
+    const {words, flag, setFlag} = useContext(MyContext); // Массив с карточками\словами
     console.log(words);
     const [valueEn, setValueEn] = useState(''); // Состояние input англ слова
     const [valueTr, setValueTr] = useState(''); // Состояние input транскрипция
@@ -56,51 +55,24 @@ export default function WordsList() {
                 tags: valueTh,
                 tags_json: "[\"\"]"
             };
-            // setWords([ newWord, ...words]);
-            // words.push(newWord);
             await POST.postWord(newWord);
             setValueEn('');
             setValueRu('');
             setValueTh('');
-            setValueTr('')
+            setValueTr('');
+            setFlag(!flag)
         }
     };
 
-    // function deleteRow(id) {
-    //     const arrData = [...words];
-    //     arrData.splice(id, 1);
-    //     setWords(arrData);
-    // }
     async function deleteRow(id) {
         await DEL.delWord(id);
-console.log( setWords);
+        setFlag(!flag)
     };
 
     async function editRow (id, props) {
-// await PUT.putWord (id, props.newWord);
 await PUT.putWord (id, props);
-// const newData = await PUT.putWord (id, props.newWord);
-
-        // setWords(newData);
-
-    }
-
-    // function editRow(english, transcription, russian, tags, id) {
-    //     const updatedWords = words.map(item => {
-    //         if (item.id === id) {
-    //             return {
-    //                 ...item,
-    //                 english,
-    //                 transcription,
-    //                 russian,
-    //                 tags,
-    //                 id
-    //             };
-    //         }
-    //         return item;
-    //     });
-    //     setWords(updatedWords);
-    // }
+setFlag(!flag)
+    };
 
     if (!words) {
         return <h1>Loading...</h1>;
@@ -125,11 +97,12 @@ await PUT.putWord (id, props);
                     english={word.english}
                     transcription={word.transcription}
                     russian={word.russian}
-                    // index={index}
                     theme={word.tags}
                     deleteRow={deleteRow}
                     editRow={editRow}
                     id={word.id}
+                    flag={flag}
+                    setFlag={setFlag}
                 />
             ))} 
         </div>
