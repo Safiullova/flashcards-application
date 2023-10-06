@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 // import CheckBox from './CheckBox'
-import st from './style.module.scss'
+import st from './style.module.scss';
+import PUT from "../../services/PUT";
 
 export default function Table(props) {
   const [valueEn, setValueEn] = useState(''); // Состояние input англ слова
@@ -14,8 +15,23 @@ export default function Table(props) {
     }
 
     // для сохранения редактирования строки
-    function clickSave() {
-      props.editRow(valueEn, valueTr, valueRu, valueTh, props.id);
+    async function clickSave() {
+      const id = props.id
+      const newWord = {
+        english: valueEn,
+        transcription: valueTr,
+        russian: valueRu,
+        tags: valueTh,
+        tags_json: "[]"
+    };
+    console.log(id);
+    console.log(newWord);
+
+await PUT.putWord (id, newWord);
+
+    // props.editRow(props.id, newWord);
+      // props.editRow(newWord, props.id);
+      // props.editRow(valueEn, valueTr, valueRu, valueTh, props.id);
       setClickEdit (!clickEdit);
   }
 
@@ -56,7 +72,7 @@ export default function Table(props) {
           </div>
           <div className={st.table__row_buttonList}>
           <button className={st.btnEdit} onClick={handleClickEdit} > Редактировать</button>
-          <button className={st.btnDeleted} onClick={() => props.deleteRow(props.index)}>Удалить</button>
+          <button className={st.btnDeleted} onClick={() => props.deleteRow(props.id)}>Удалить</button>
           </div>
         </> :
         <>
@@ -66,6 +82,7 @@ export default function Table(props) {
           <input className={st.table__row_input} type="text" defaultValue={props.theme} value={valueTh} onChange={handleChange} name="theme"></input>
           <div className={st.table__row_buttonList}>
             <button className={st.btnCancel} onClick={handleClickCancel}>Отмена</button>
+            {/* <button className={st.btnSave} onClick={clickSave}>Сохранить</button>  */}
             <button className={st.btnSave} onClick={clickSave}>Сохранить</button> 
           </div>
         </>}

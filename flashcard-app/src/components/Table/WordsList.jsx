@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-// import cards from '../data/words.json'
-// import NewRow from './NewRow'
+
 import Table from './Table'
 import st from './style.module.scss'
 import { useContext } from "react";
 import { MyContext } from "../../context/MyContext";
+import POST from "../../services/POST";
+import DEL from "../../services/DEL";
+import PUT from "../../services/PUT";
 
 export default function WordsList() {
 // const cards = useContext(MyContext);
 
     const {words, setWords} = useContext(MyContext); // Массив с карточками\словами
-    // const {setWords} = useContext(MyContext); // Массив с карточками\словами
     console.log(words);
-    // const [words, setWords] = useState(cards); // Массив с карточками\словами
     const [valueEn, setValueEn] = useState(''); // Состояние input англ слова
     const [valueTr, setValueTr] = useState(''); // Состояние input транскрипция
     const [valueRu, setValueRu] = useState(''); // Состояние input перевод
@@ -40,22 +40,25 @@ export default function WordsList() {
     
     useEffect(() => {
         inpRef.current.focus();
-        },[])
+        },[]);
     
-    const handleAddWord = () => {
+        async function handleAddWord ()  {
         if (valueEn.trim() !== '' ||
             valueTr.trim() !== '' ||
-            valueRu.trim() !== '' ||
+            valueRu.trim() !== '' 
+            ||
             valueTh.trim() !== ''
         ) {
             const newWord = {
-                id: Date.now(),
                 english: valueEn,
                 transcription: valueTr,
                 russian: valueRu,
                 tags: valueTh,
+                tags_json: "[\"\"]"
             };
-            setWords([ newWord, ...words]);
+            // setWords([ newWord, ...words]);
+            // words.push(newWord);
+            await POST.postWord(newWord);
             setValueEn('');
             setValueRu('');
             setValueTh('');
@@ -63,26 +66,41 @@ export default function WordsList() {
         }
     };
 
-    function deleteRow(id) {
-        const arrData = [...words];
-        arrData.splice(id, 1);
-        setWords(arrData);
+    // function deleteRow(id) {
+    //     const arrData = [...words];
+    //     arrData.splice(id, 1);
+    //     setWords(arrData);
+    // }
+    async function deleteRow(id) {
+        await DEL.delWord(id);
+console.log( setWords);
+    };
+
+    async function editRow (id, props) {
+// await PUT.putWord (id, props.newWord);
+await PUT.putWord (id, props);
+// const newData = await PUT.putWord (id, props.newWord);
+
+        // setWords(newData);
+
     }
-    function editRow(english, transcription, russian, tags, id) {
-        const updatedWords = words.map(item => {
-            if (item.id === id) {
-                return {
-                    ...item,
-                    english,
-                    transcription,
-                    russian,
-                    tags
-                };
-            }
-            return item;
-        });
-        setWords(updatedWords);
-    }
+
+    // function editRow(english, transcription, russian, tags, id) {
+    //     const updatedWords = words.map(item => {
+    //         if (item.id === id) {
+    //             return {
+    //                 ...item,
+    //                 english,
+    //                 transcription,
+    //                 russian,
+    //                 tags,
+    //                 id
+    //             };
+    //         }
+    //         return item;
+    //     });
+    //     setWords(updatedWords);
+    // }
 
     if (!words) {
         return <h1>Loading...</h1>;
@@ -101,13 +119,13 @@ export default function WordsList() {
                 </div>
             </div>
         <br></br>
-            {words.map((word, index)=> (
+            {words.map((word)=> (
                 <Table className={st.table}
                     key={word.id}
                     english={word.english}
                     transcription={word.transcription}
                     russian={word.russian}
-                    index={index}
+                    // index={index}
                     theme={word.tags}
                     deleteRow={deleteRow}
                     editRow={editRow}
