@@ -71,10 +71,10 @@ await PUT.putWord (id, newWord);
           </div>
         </> :
         <>
-          <input className={st.table__row_input} type="text" defaultValue={props.english} value={valueEn} onChange={handleChange} name='english'></input>
-          <input className={st.table__row_input} type="text" defaultValue={props.transcription} value={valueTr} onChange={handleChange} name='transcription'></input>
-          <input className={st.table__row_input} type="text" defaultValue={props.russian} value={valueRu} onChange={handleChange} name="russian"></input>
-          <input className={st.table__row_input} type="text" defaultValue={props.theme} value={valueTh} onChange={handleChange} name="theme"></input>
+          <input className={st.table__row_input} type="text" value={valueEn} onChange={handleChange} name='english'></input>
+          <input className={st.table__row_input} type="text" value={valueTr} onChange={handleChange} name='transcription'></input>
+          <input className={st.table__row_input} type="text"  value={valueRu} onChange={handleChange} name="russian"></input>
+          <input className={st.table__row_input} type="text"  value={valueTh} onChange={handleChange} name="theme"></input>
           <div className={st.table__row_buttonList}>
             <button className={st.btnCancel} onClick={handleClickCancel}>Отмена</button>
             <button className={st.btnSave} onClick={clickSave}>Сохранить</button> 

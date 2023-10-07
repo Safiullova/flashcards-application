@@ -6,11 +6,8 @@ import { useContext} from 'react';
 import { MyContext } from '../../context/MyContext';
 
 export default function Slider() {
-    // const index = Number (cards.length -1);
-    // const rand = Math.floor (Math.random(0, 10)*index ) +1;
 
-    const {words} = useContext(MyContext); // Массив с карточками\словами
-
+    const {words} = useContext(MyContext); // Массив с карточками\словами из контекста
 
     let [index, setIndex] = useState (0);
     let [check, setCheck] = useState (1);

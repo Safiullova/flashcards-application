@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { useContext } from "react";
+import { MyContext } from "../../context/MyContext";
 
 import Table from './Table'
 import st from './style.module.scss'
-import { useContext } from "react";
-import { MyContext } from "../../context/MyContext";
+
 import POST from "../../services/POST";
 import DEL from "../../services/DEL";
 import PUT from "../../services/PUT";
@@ -17,22 +18,47 @@ export default function WordsList() {
     const [valueRu, setValueRu] = useState(''); // Состояние input перевод
     const [valueTh, setValueTh] = useState(''); // Состояние input тема
 
-    const handleChange = (e) => {
-        if (e.target.name === 'newEnglish') {
-            setValueEn(e.target.value.trim());}
-                if (e.target.name === 'newTranscription')
-                    {setValueTr(e.target.value.trim().toLowerCase());}
-                    if (e.target.name === 'newRussian')
-                        {setValueRu(e.target.value.trim());}
-                            if (e.target.name === 'newTheme')
-                                {setValueTh(e.target.value.trim().toLowerCase());}
-    };
+    const [validEnglish, setValidEnglish] = useState(true);
+    const [validRussian, setValidRussian] = useState(true);
 
-    const handleCanselBack = () => {
+    const cleanInputs = () => {
         setValueEn ('');
         setValueTr ('');
         setValueRu ('');
-        setValueTh ('');
+        setValueTh ('')
+    }
+
+    const checkValidEnglish =(e) => {
+        const isValid = /^[a-zA-Z]*$/.test(e.target.value.trim())
+            setValidEnglish(isValid)
+            if (!isValid) {
+                alert('Внимание! Английские слова пиши английскими буквами');
+                setValueEn('')
+            } else {setValueEn(e.target.value.trim())}
+    };
+
+    const checkValidRussian =(e) => {
+        const isValid = /^[а-яА-ЯёЁ]*$/.test(e.target.value.trim())
+        setValidRussian(isValid)
+        if (!isValid) {
+            alert('Внимание! Перевод должен быть на русском языке');
+            setValueRu('')
+            } else {setValueRu(e.target.value.trim())}
+    };
+
+    const handleChange = (e) => {
+        if (e.target.name === 'newEnglish') {
+            checkValidEnglish(e)}
+                if (e.target.name === 'newTranscription') {
+                    setValueTr(e.target.value.trim().toLowerCase())}
+                        if (e.target.name === 'newRussian') {
+                            checkValidRussian(e)}
+                                if (e.target.name === 'newTheme') {
+                                    setValueTh(e.target.value.trim().toLowerCase())}
+    };
+
+    const handleCanselBack = () => {
+        cleanInputs()
     }
 
     const inpRef = useRef ();
@@ -42,11 +68,8 @@ export default function WordsList() {
         },[]);
     
         async function handleAddWord ()  {
-        if (valueEn.trim() !== '' ||
-            valueTr.trim() !== '' ||
+        if (valueEn.trim() !== '' &&
             valueRu.trim() !== '' 
-            ||
-            valueTh.trim() !== ''
         ) {
             const newWord = {
                 english: valueEn,
@@ -56,11 +79,17 @@ export default function WordsList() {
                 tags_json: "[\"\"]"
             };
             await POST.postWord(newWord);
-            setValueEn('');
-            setValueRu('');
-            setValueTh('');
-            setValueTr('');
+            cleanInputs();
             setFlag(!flag)
+        }
+        else if (valueEn.trim() !=='' )
+            {const english = `${valueEn.trim()}`;
+                alert ('Как переводится слово ' + english.toUpperCase() +'? Заполни поле: "Перевод"')
+    } else if (valueRu.trim() !=='' )
+                {const russian = `${valueRu.trim()}`;
+                    alert ('Как слово ' + russian.toUpperCase() +' пишется на английском? Заполни поле: "English"')}
+        else {
+            alert ('Чтобы выучить новое слово нужно заполнить: "English" и "Перевод"')
         }
     };
 
@@ -81,10 +110,10 @@ setFlag(!flag)
     return (
         <div className={st.container}>
             <div className={st.table__row}>
-            <input ref={inpRef} className={st.table__row_input} type="text" placeholder='english' name='newEnglish' value={valueEn} onChange={handleChange}></input>
-            <input className={st.table__row_input} type="text" placeholder='transcription' name='newTranscription' value={valueTr} onChange={handleChange} ></input>
-            <input className={st.table__row_input} type="text" placeholder='russian' name='newRussian' value={valueRu} onChange={handleChange}></input>
-            <input className={st.table__row_input} type="text" placeholder='theme' name='newTheme'value={valueTh} onChange={handleChange}></input>
+            <input ref={inpRef} className={validEnglish? st.table__row_input : `${st.table__row_input } ${st.error}`}  type="text" placeholder='english' name='newEnglish' value={valueEn} onChange={handleChange}></input>
+            <input className={st.table__row_input} type="text" placeholder='транскрипция' name='newTranscription' value={valueTr} onChange={handleChange} ></input>
+            <input className={validRussian? st.table__row_input : `${st.table__row_input } ${st.error}`} type="text" placeholder='перевод' name='newRussian' value={valueRu} onChange={handleChange}></input>
+            <input className={st.table__row_input} type="text" placeholder='тема' name='newTheme'value={valueTh} onChange={handleChange}></input>
                 <div className={st.table__row_buttonList}>
                     <button className={st.btnSave} onClick={handleAddWord} >Добавить слово</button> 
                     {valueEn ||valueRu || valueTh || valueTr ? <button className={st.btnSave} onClick={handleCanselBack}>Отмена</button> : ''}
@@ -103,6 +132,8 @@ setFlag(!flag)
                     id={word.id}
                     flag={flag}
                     setFlag={setFlag}
+                    // checkEnglish = {checkValidEnglish}
+                    change = {handleChange}
                 />
             ))} 
         </div>
