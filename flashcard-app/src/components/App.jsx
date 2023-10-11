@@ -6,10 +6,11 @@ import  {ThemeContext} from "../context/ThemeContext";
 
 import '../style/App.scss';
 import stHeader from '../style/header.scss';
-
+// import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
 
 function App() {
-
+// const word = useSelector(storeWords => storeWords);
+// console.log(word);
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (

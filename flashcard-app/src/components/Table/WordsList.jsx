@@ -1,18 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 import { useContext } from "react";
 import { MyContext } from "../../context/MyContext";
-
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { addWord } from "../../Redux/action";
 import Table from './Table'
 import st from './style.module.scss'
 
-import POST from "../../services/POST";
+// import POST from "../../services/POST";
 import DEL from "../../services/DEL";
 import PUT from "../../services/PUT";
 
 export default function WordsList() {
+const words = useSelector(storeWords => storeWords);
+const dispatch = useDispatch();
 
-    const {words, flag, setFlag} = useContext(MyContext); // Массив с карточками\словами
-    console.log(words);
+console.log(words);
+
+    const {flag, setFlag} = useContext(MyContext); // Массив с карточками\словами
+    // const {words, flag, setFlag} = useContext(MyContext); // Массив с карточками\словами
+    // console.log(words);
     const [valueEn, setValueEn] = useState(''); // Состояние input англ слова
     const [valueTr, setValueTr] = useState(''); // Состояние input транскрипция
     const [valueRu, setValueRu] = useState(''); // Состояние input перевод
@@ -78,7 +85,8 @@ export default function WordsList() {
                 tags: valueTh,
                 tags_json: "[\"\"]"
             };
-            await POST.postWord(newWord);
+dispatch(addWord(newWord));
+            // await POST.postWord(newWord);
             cleanInputs();
             setFlag(!flag)
         }
