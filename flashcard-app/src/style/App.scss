@@ -1,18 +1,71 @@
-main{
+@import 'vars.scss';
+
+*,
+:after,
+:before {
+    -webkit-box-sizing:  border-box;
+    -moz-box-sizing:  border-box;
+    box-sizing: border-box;
+}
+
+main, header, footer{
     border-bottom: 10px solid;
     border-top: 10px solid;
-    padding: 30px 0;
-    max-width: 60%;
+    padding: 6px 10%;
     margin: 0 auto;
-    width: 100%;
 }
 
 .body_light {
-    background-color: rgb(228, 218, 238);
-    color:  rgb(26, 13, 50);
+    background: $color-bgLight;
+    color: $color-txtLight;
+    
+    a{
+        color: $color-txtLight; 
+    }
 }
 
 .body_dark {
-    background-color:rgb(26, 13, 50);
-    color:  rgb(228, 218, 238);
+    background: $color-bgDark;
+    color: $color-txtDark;
+
+    a{
+        color: $color-txtDark; 
+    }
 }
+
+button, img {
+    cursor: pointer;  
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    nav {
+        width: 100%;
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+            padding: 0;
+
+            a {
+                text-decoration: none;
+            }
+            a:hover, .active {
+                text-underline-offset: 4px;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .container{
+        display: flex;
+        
+    }
+
+    .poster {
+        width: 200px;
+        height: 200px;
+        border: 2px solid $color-border;
+    }

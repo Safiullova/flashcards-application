@@ -1,6 +1,8 @@
 import {useState, useEffect} from "react";
 import st from './style.module.scss';
 import PUT from "../../services/PUT";
+import Icon_del from "../../images/icons/delete.svg";
+import Icon_edit from "../../images/icons/edit.svg";
 
 export default function Table(props) {
   const [valueEn, setValueEn] = useState(''); // Состояние input англ слова
@@ -27,7 +29,7 @@ export default function Table(props) {
     console.log(id);
     console.log(newWord);
 
-await PUT.putWord (id, newWord);
+      await PUT.putWord (id, newWord);
       setClickEdit (!clickEdit);
       setFlag(!flag); 
   }
@@ -66,15 +68,16 @@ await PUT.putWord (id, newWord);
           <div className={st.table__row_input}>{props.theme}</div>
           
           <div className={st.table__row_buttonList}>
-          <button className={st.btnEdit} onClick={handleClickEdit} > Редактировать</button>
-          <button className={st.btnDeleted} onClick={() => props.deleteRow(props.id)}>Удалить</button>
+          <img src={Icon_edit } alt="edit"  className={st.btnEdit} onClick={handleClickEdit} /> {/*Иконка-кнопка для редактирования слова*/}
+          {/* <button className={st.btnEdit} onClick={handleClickEdit} > Редактировать</button> */}
+          <img src={Icon_del } alt="delete" className={st.btnDeleted} onClick={() => props.deleteRow(props.id)}/> {/*Иконка-кнопка для удаления слова*/}
           </div>
         </> :
         <>
-          <input className={st.table__row_input} type="text" value={valueEn} onChange={handleChange} name='english'></input>
-          <input className={st.table__row_input} type="text" value={valueTr} onChange={handleChange} name='transcription'></input>
-          <input className={st.table__row_input} type="text"  value={valueRu} onChange={handleChange} name="russian"></input>
-          <input className={st.table__row_input} type="text"  value={valueTh} onChange={handleChange} name="theme"></input>
+          <input className={`${st.table__row_input} ${st.selected}`} type="text" value={valueEn} onChange={handleChange} name='english'></input>
+          <input className={`${st.table__row_input} ${st.selected}`} type="text" value={valueTr} onChange={handleChange} name='transcription'></input>
+          <input className={`${st.table__row_input} ${st.selected}`} type="text"  value={valueRu} onChange={handleChange} name="russian"></input>
+          <input className={`${st.table__row_input} ${st.selected}`} type="text"  value={valueTh} onChange={handleChange} name="theme"></input>
           <div className={st.table__row_buttonList}>
             <button className={st.btnCancel} onClick={handleClickCancel}>Отмена</button>
             <button className={st.btnSave} onClick={clickSave}>Сохранить</button> 

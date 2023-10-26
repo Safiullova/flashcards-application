@@ -23,19 +23,22 @@ export default function Slider() {
     }
     
     return (
-        <div>
-            <Card className={st.card}
-            id={words[index].id}
-            english={words[index].english}
-            transcription={words[index].transcription}
-            russian={words[index].russian}
-            />
-            <div className={st.card__btnList}>
-                <button className={st.card__btnList_Nok} onClick={handleClickBack}>Назад</button>
-                <p>{check}</p> {/* Счетчик */}
-                <p>/</p>
-                <p>{words.length}</p> {/* сколько всего карточек */}
-                <button className={st.card__btnList_Ok} onClick={handleClickUp}>Вперед</button>
+        <div className={st.container}>
+            <div className={st.text}>Блок с текстовым описанием</div>
+            <div >
+                <Card className={st.card}
+                id={words[index].id}
+                english={words[index].english}
+                transcription={words[index].transcription}
+                russian={words[index].russian}
+                />
+                <div className={st.card__btnList}>
+                    <button className={st.card__btnList_Nok} onClick={handleClickBack}>Назад</button>
+                    <p>{check}</p> {/* Счетчик */}
+                    <p>/</p>
+                    <p>{words.length}</p> {/* сколько всего карточек */}
+                    <button className={st.card__btnList_Ok} onClick={handleClickUp}>Вперед</button>
+                </div>
             </div>
         </div>
     )

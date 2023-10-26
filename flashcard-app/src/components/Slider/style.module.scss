@@ -1,11 +1,14 @@
-@import '../../../src/style/vars.scss';
+@import '../../style/vars.scss';
 
 .container {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: space-around;
     margin: 0 auto;
-    border: 2px solid purple;
+    border-radius: 20px;
+    background: $color-bgLight;
+}
+.text {
+    color: $color-txtLight;
 }
 
 .card {
@@ -13,9 +16,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 250px;
-    height: 350px;
-    border: 2px solid $color-violet;
+    width: 350px;
+    height: 500px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px 5px #FFF0F0;
+    background: $color-bgDark;
 
     &__ranscription {
         font-weight: bold;

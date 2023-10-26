@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import ErrorImg from '../images/error.png';
 
 export default function Error() {
   return (
     <div>
-    Ошибка 404
+    <img src={ErrorImg} alt="Error" />
     </div>
   )
 }

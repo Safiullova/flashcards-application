@@ -108,6 +108,7 @@ setFlag(!flag)
     };
 
     return (
+        <>
         <div className={st.container}>
             <div className={st.table__row}>
             <input ref={inpRef} className={validEnglish? st.table__row_input : `${st.table__row_input } ${st.error}`}  type="text" placeholder='english' name='newEnglish' value={valueEn} onChange={handleChange}></input>
@@ -119,7 +120,9 @@ setFlag(!flag)
                     {valueEn ||valueRu || valueTh || valueTr ? <button className={st.btnSave} onClick={handleCanselBack}>Отмена</button> : ''}
                 </div>
             </div>
+        </div>
         <br></br>
+        <div className={st.container}>
             {words.map((word)=> (
                 <Table className={st.table}
                     key={word.id}
@@ -132,10 +135,10 @@ setFlag(!flag)
                     id={word.id}
                     flag={flag}
                     setFlag={setFlag}
-                    // checkEnglish = {checkValidEnglish}
                     change = {handleChange}
                 />
             ))} 
         </div>
+        </>
     )
 }

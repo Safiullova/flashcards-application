@@ -1,36 +1,39 @@
 @import '../../style/vars.scss';
 
+.container {
+    border-radius: 10px;
+    border: 2px solid $color-border;
+}
+
 .table {
-    margin: 0 auto;
+    margin: 0;
 
     &__row {
         display: flex;
         
-
         &_input{
-            width: 30%;
-            min-width: 100px;
+            width: calc((100% - 113px)/4);
             display: flex;
-            height: 50px;
-            padding-left: 5px;
+            padding-left: 16px;
             align-items:  center;
-            border: 1px solid $color-yellow;
+            border: 1px solid $color-Lgrey;
         }
         &_buttonList {
             display: flex;
-            height: 50px;
+            justify-content: space-around;
+            width: 113px;
+            height: 56px;
             padding-left: 5px;
             align-items:  center;
-            border: 1px solid $color-yellow;
-            width: 350px;
-            min-width: 180px;
+            border: 1px solid $color-Lgrey;
+            background: #FFF;
         }
     }
 }
 
 .selected {
-    background-color:  #4A465B;
-    border: 1px solid $color-TXT-green;
+    background-color:  $color-bgInput-Select;
+    color: $color-txtLight;
 }
 
 .deleled {
@@ -38,5 +41,6 @@
 }
 
 .error {
-   background-color: pink;
+   background-color: $color-bgInput-Error;
+   
 }

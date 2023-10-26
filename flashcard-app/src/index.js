@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './style/index.scss';
 import App from './components/App';
 import {ThemeContextProvider} from './context/ThemeContext';
 import { MyContextComponent } from './context/MyContext';
