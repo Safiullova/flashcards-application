@@ -3,6 +3,8 @@ import st from './style.module.scss';
 import PUT from "../../services/PUT";
 import Icon_del from "../../images/icons/delete.svg";
 import Icon_edit from "../../images/icons/edit.svg";
+import Icon_save from "../../images/icons/ok.png";
+import Icon_nok from "../../images/icons/nok.png";
 
 export default function Table(props) {
   const [valueEn, setValueEn] = useState(''); // Состояние input англ слова
@@ -79,8 +81,10 @@ export default function Table(props) {
           <input className={`${st.table__row_input} ${st.selected}`} type="text"  value={valueRu} onChange={handleChange} name="russian"></input>
           <input className={`${st.table__row_input} ${st.selected}`} type="text"  value={valueTh} onChange={handleChange} name="theme"></input>
           <div className={st.table__row_buttonList}>
-            <button className={st.btnCancel} onClick={handleClickCancel}>Отмена</button>
-            <button className={st.btnSave} onClick={clickSave}>Сохранить</button> 
+          {/* <button className={st.btnSave} onClick={clickSave}>Сохранить</button>  */}
+          <img src={Icon_save} alt="save"  className={st.btnIcon} onClick={clickSave}/> 
+            {/* <button className={st.btnCancel} onClick={handleClickCancel}>Отмена</button> */}
+            <img src={Icon_nok} alt="delete"  className={st.btnIcon} onClick={handleClickCancel}/>
           </div>
         </>}
       </div>}

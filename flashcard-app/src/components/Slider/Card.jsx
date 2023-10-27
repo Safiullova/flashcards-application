@@ -21,21 +21,19 @@ export default function Card(props) {
     return (
         <div className={st.card}>
             <h1 className={st.card__english}>{english}</h1>
-            {/* <p className={st.card__id}>{id}</p> */}
-            <p className={st.card__ranscription}>{transcription}</p>
+            <div className={st.card__ranscription}>{transcription}</div>
             
             {!pressed ?
-            (<button className={st.card_button} onClick={handleChange}>Показать перевод</button>
-            )
-            : (
-            <>
-            <div className={st.card__russian}>{russian}</div>
-            <div className={st.card__btnList}>
-                <button onClick={handleClickOk} className={st.card__btnList_Ok}>Правильно</button>
-                <button onClick={handleClickNok} className={st.card__btnList_Nok}>Еще повторить</button>
-            </div>
-            </>
-            ) 
+                (<button className={st.card_button} onClick={handleChange}>Показать перевод</button>)
+                : (
+                    <>
+                        <div className={st.card__russian}>{russian}</div>
+                        <div className={st.card__btnList}>
+                            <button onClick={handleClickOk} className={st.card__btnList_Ok}>Правильно</button>
+                            <button onClick={handleClickNok} className={st.card__btnList_Nok}>Еще повторить</button>
+                        </div>
+                    </>
+                ) 
             }
         </div>
     )

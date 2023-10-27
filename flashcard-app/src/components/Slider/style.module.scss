@@ -6,6 +6,7 @@
     margin: 0 auto;
     border-radius: 20px;
     background: $color-bgLight;
+    padding: 30px;
 }
 .text {
     color: $color-txtLight;
@@ -24,30 +25,41 @@
 
     &__ranscription {
         font-weight: bold;
+        height: 50px;
     }
     &__russian {
         margin-bottom: 35px;
         font-weight: bolder;
+        height: 50px;
     }
     &_button {
         height: 50px;
-        background-color: $color-BG-green;
-        color: $color-TXT-green;
+        border-radius: 20px;
+        padding: 0 25px;
+        background-color: green;
+        color: red;
     }
     
     &__btnList {
         display: flex;
         justify-content: space-around;
+        align-items: center;
         width: 250px;
+        margin: 0 auto;
 
         &_Ok {
-            background-color: $color-BG-green;
-            color: $color-TXT-green;
+            background-color: green;
+            color: red;
         }
 
         &_Nok {
-            background-color: $color-BG-red;
-            color: $color-TXT-red;
+            background-color: red;
+            color: green;
+        }
+
+        img {
+            width: 24px;
+            height: 24px;
         }
     }
 }
@@ -56,3 +68,7 @@
     display: none;
 }
 
+p {
+    color: $color-txtLight;
+
+}

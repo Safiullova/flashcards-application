@@ -2,7 +2,8 @@
 
 .container {
     border-radius: 10px;
-    border: 2px solid $color-border;
+    border: 3px solid $color-border;
+    // padding: 10px;
 }
 
 .table {
@@ -27,6 +28,11 @@
             align-items:  center;
             border: 1px solid $color-Lgrey;
             background: #FFF;
+.btnIcon {
+    width: 24px;
+    height: 24px;
+}
+
         }
     }
 }
@@ -44,3 +50,4 @@
    background-color: $color-bgInput-Error;
    
 }
+

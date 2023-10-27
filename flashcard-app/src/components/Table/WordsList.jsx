@@ -9,6 +9,10 @@ import POST from "../../services/POST";
 import DEL from "../../services/DEL";
 import PUT from "../../services/PUT";
 
+import Icon_add from "../../images/icons/add.svg";
+import Icon_back_arrow from "../../images/icons/back_arrow.svg";
+
+
 export default function WordsList() {
 
     const {words, flag, setFlag} = useContext(MyContext); // Массив с карточками\словами
@@ -115,9 +119,9 @@ setFlag(!flag)
             <input className={st.table__row_input} type="text" placeholder='транскрипция' name='newTranscription' value={valueTr} onChange={handleChange} ></input>
             <input className={validRussian? st.table__row_input : `${st.table__row_input } ${st.error}`} type="text" placeholder='перевод' name='newRussian' value={valueRu} onChange={handleChange}></input>
             <input className={st.table__row_input} type="text" placeholder='тема' name='newTheme'value={valueTh} onChange={handleChange}></input>
-                <div className={st.table__row_buttonList}>
-                    <button className={st.btnSave} onClick={handleAddWord} >Добавить слово</button> 
-                    {valueEn ||valueRu || valueTh || valueTr ? <button className={st.btnSave} onClick={handleCanselBack}>Отмена</button> : ''}
+                <div className={st.table__row_buttonList} >
+                        <img src={Icon_add} alt="add word" onClick={handleAddWord}></img>
+                    {valueEn ||valueRu || valueTh || valueTr ? <img src={Icon_back_arrow} alt="back" onClick={handleCanselBack}/> : ''}
                 </div>
             </div>
         </div>
